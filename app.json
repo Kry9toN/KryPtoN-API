@@ -1,0 +1,13 @@
+{
+  "name": "KryPtoN API",
+  "description": "KryPtoN Application Platform Integration",
+  "keywords": [
+    "api",
+    "python",
+    "krypton",
+    "web"
+  ],
+  "repository": "https://github.com/Kry9toN/KryPtoN-API",
+  "website": "",
+  "stack": "container"
+}

@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup as bs
 from requests import get, post
 import os, math, json, random, re, html_text, pytesseract, base64, time, smtplib
 
-ua_ig = 'Mozilla/5.0 (Linux; Android 9; SM-A102U Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.136 Mobile Safari/537.36 Instagram 155.0.0.37.107 Android (28/9; 320dpi; 720x1468; samsung; SM-A102U; a10e; exynos7885; en_US; 239490550)'
+ua_ig = 'Mozilla/5.0 (Linux; Android 10; Redmi Note 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Mobile Safari/537.36'
 
 app = Flask(__name__)
 apiKey = 'O8mUD3YrHIy9KM1fMRjamw8eg'
@@ -39,7 +39,7 @@ def convert_size(size_bytes):
 def sendTts(filename):
 	return send_from_directory(app.config['MEDIA'], filename, as_attachment=True)
 
-@app.route('/api/layer', methods=['GET','POST'])
+@app.route('/v1/layer', methods=['GET','POST'])
 def layer():
 	if request.args.get('base64image'):
 		try:
@@ -65,7 +65,7 @@ def layer():
 			'msg': '[!] Masukkan parameter base64image'
 		}
 
-@app.route('/api/spamgmail', methods=['GET','POST'])
+@app.route('/v1/spamgmail', methods=['GET','POST'])
 def spamgimel():
     if request.args.get('target'):
         if request.args.get('jum'):
@@ -111,7 +111,7 @@ def spamgimel():
             'msg': 'Masukkan parameter target'
         }
 
-@app.route('/api/spamcall', methods=['GET','POST'])
+@app.route('/v1/spamcall', methods=['GET','POST'])
 def spamcall():
     if request.args.get('no'):
         no = request.args.get('no')
@@ -137,7 +137,7 @@ def spamcall():
             'status': False,
             'msg': '[!] Masukkan parameter no' 
         }
-@app.route('/api/spamsms', methods=['GET','POST'])
+@app.route('/v1/spamsms', methods=['GET','POST'])
 def spamming():
     if request.args.get('no'):
         if request.args.get('jum'):
@@ -203,12 +203,12 @@ def noolees():
             'status': False,
             'msg': '[!] Masukkan parameter text'
         }
-@app.route('/api/wiki', methods=['GET','POST'])
+@app.route('/v1/wiki', methods=['GET','POST'])
 def wikipedia():
 	if request.args.get('q'):
 		try:
 			kya = request.args.get('q')
-			cih = f'https://id.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={kya}'
+			cih = f'https://id.wikipedia.org/w/v1.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={kya}'
 			heuh = get(cih).json()
 			heuh_ = heuh['query']['pages']
 			hueh = re.findall(r'(\d+)', str(heuh_))
@@ -229,7 +229,7 @@ def wikipedia():
 			'msg': '[!] Masukkan param q'
 		}
 
-@app.route('/api/tts', methods=['GET','POST'])
+@app.route('/v1/tts', methods=['GET','POST'])
 def tts():
 	if request.args.get('text'):
 		try:
@@ -241,7 +241,7 @@ def tts():
 					'msg': '[❗] Maaf teks terlalu panjang!!',
 				}
 			else:
-				url = f'https://rest.farzain.com/api/tts.php?id={teks}&apikey='
+				url = f'https://rest.farzain.com/v1/tts.php?id={teks}&apikey='
 				if os.path.isfile('./tts/tts.mp3') == True:
 					os.remove('./tts/tts.mp3')
 					Tts = get(f'{url}{apiKey}').content
@@ -271,7 +271,7 @@ def tts():
 			'msg': '[!] Masukkan parameter text'
 		}
 
-@app.route('/api/ytv', methods=['GET','POST'])
+@app.route('/v1/ytv', methods=['GET','POST'])
 def ytv():
 	if request.args.get('url'):
 		try:
@@ -304,7 +304,7 @@ def ytv():
 			'msg': 'Masukkan parameter url'
 		}
 
-@app.route('/api/yta', methods=['GET','POST'])
+@app.route('/v1/yta', methods=['GET','POST'])
 def yta():
 	if request.args.get('url'):
 		try:
@@ -336,7 +336,7 @@ def yta():
 			'msg': '[!] Masukkan parameter url'
 		}
 
-@app.route('/api/chord', methods=['GET','POST'])
+@app.route('/v1/chord', methods=['GET','POST'])
 def chord():
 	if request.args.get('q'):
 		try:
@@ -360,7 +360,7 @@ def chord():
 			'msg': '[!] Masukkan parameter q'
 		}
 
-@app.route('/api/dewabatch', methods=['GET','POST'])
+@app.route('/v1/dewabatch', methods=['GET','POST'])
 def dewabatch():
 	if request.args.get('q'):
 		try:
@@ -386,7 +386,7 @@ def dewabatch():
 			'msg': '[!] Masukkan parameter q'
 		}
 
-@app.route('/api/komiku', methods=['GET','POST'])
+@app.route('/v1/komiku', methods=['GET','POST'])
 def komiku():
     if request.args.get('q'):
         try:
@@ -414,7 +414,7 @@ def komiku():
             'msg': '[!] Masukkan parameter q'
         }
 
-@app.route('/api/kuso', methods=['GET','POST'])
+@app.route('/v1/kuso', methods=['GET','POST'])
 def kusonime():
 	if request.args.get('q'):
 		try:
@@ -442,7 +442,7 @@ def kusonime():
 			'msg': '[!] Masukkan parameter q'
 		}
 
-@app.route('/api/otakudesu')
+@app.route('/v1/otakudesu')
 def otakudesuu():
     if request.args.get('q'):
         try:
@@ -469,7 +469,7 @@ def otakudesuu():
             'msg': '[!] Masukkan parameter q'
         }
             
-@app.route('/api/brainly', methods=['GET','POST'])
+@app.route('/v1/brainly', methods=['GET','POST'])
 def brainly_scraper():
 	if request.args.get('q'):
 		try:
@@ -491,28 +491,28 @@ def brainly_scraper():
 			'msg': '[!] Masukkan parameter q'
 		}
 
-@app.route('/api/nekonime', methods=['GET','POST'])
+@app.route('/v1/nekonime', methods=['GET','POST'])
 def nekonimek():
 	try:
-		neko = get('https://waifu.pics/api/sfw/neko').json()
+		neko = get('https://waifu.pics/v1/sfw/neko').json()
 		nimek = neko['url']
 		return {
 			'status': 200,
 			'result': nimek
 		}
 	except:
-		neko = get('https://waifu.pics/api/sfw/neko').json()
+		neko = get('https://waifu.pics/v1/sfw/neko').json()
 		nimek = neko['url']
 		return {
 			'status': 200,
 			'result': nimek
 		}
 
-@app.route('/api/randomloli', methods=['GET','POST'])
+@app.route('/v1/randomloli', methods=['GET','POST'])
 def randomloli():
 	try:
 		hehe = ['kawaii','neko']
-		loli = get('https://api.lolis.life/%s' % random.choice(hehe)).json()['url']
+		loli = get('https://v1.lolis.life/%s' % random.choice(hehe)).json()['url']
 		return {
 			'status': 200,
 			'result': loli
@@ -522,13 +522,13 @@ def randomloli():
 			'status': 200,
 			'result': loli
 		}
-@app.route('/api/ig', methods=['GET','POST'])
+@app.route('/v1/ig', methods=['GET','POST'])
 def igeh():
 	if request.args.get('url'):
 		try:
 			url = request.args.get('url')
 			data = {'id': url}
-			result = get('https://www.villahollanda.com/api.php?url=' + url).json()
+			result = get('https://www.villahollanda.com/v1.php?url=' + url).json()
 			if result['descriptionc'] == None:
 				return {
 					'status': False,
@@ -552,13 +552,13 @@ def igeh():
 			'msg': '[!] Masukkan parameter url'
 		}
 
-@app.route('/api/cuaca', methods=['GET','POST'])
+@app.route('/v1/cuaca', methods=['GET','POST'])
 def cuaca():
 	if request.args.get('q'):
 		try:
 			q = request.args.get('q')
 			print(q)
-			url = f'https://rest.farzain.com/api/cuaca.php?id={q}&apikey='
+			url = f'https://rest.farzain.com/v1/cuaca.php?id={q}&apikey='
 			weather = get(f'{url}{apiKey}').json()
 			print(weather)
 			if weather['respon']['deskripsi'] == 'null' or weather['respon']['deskripsi'] == None:
@@ -592,7 +592,7 @@ def cuaca():
 			'msg': '[!] Masukkan parameter q'
 		}
 
-@app.route('/api/stalk', methods=['GET','POST'])
+@app.route('/v1/stalk', methods=['GET','POST'])
 def stalk():
 	if request.args.get('username'):
 		try:
@@ -635,13 +635,13 @@ def daerah():
 		'result': hasil
 	}
 
-@app.route('/api/jadwalshalat', methods=['GET','POST'])
+@app.route('/v1/jadwalshalat', methods=['GET','POST'])
 def jadwalshalat():
 	if request.args.get('daerah'):
 		try:
 			daer = request.args.get('daerah')
 			daerah = 'Ambarawa, Ambon, Amlapura, Amuntai, Argamakmur, Atambua, Babo, Bagan Siapiapi, Kalteng, Bajawa, Balige, Balikpapan, Banda Aceh, Bandarlampung, Bandung, Bangkalan, Bangkinang, Bangko, Bangli, Banjar, Banjar Baru, Banjarmasin, Banjarnegara, Bantaeng, Banten, Bantul, Banyuwangi, Barabai, Barito, Barru, Batam, Batang, Batu, Baturaja, Batusangkar, Baubau, Bekasi, Bengkalis, Bengkulu, Benteng, Biak, Bima, Binjai, Bireuen, Bitung, Blitar, Blora, Bogor, Bojonegoro, Bondowoso, Bontang, Boyolali, Brebes, Bukit Tinggi, Maluku, Bulukumba, Buntok, Cepu, Ciamis, Cianjur, Cibinong, Cilacap, Cilegon, Cimahi, Cirebon, Curup, Demak, Denpasar, Depok, Dili, Dompu, Donggala, Dumai, Ende, Enggano, Enrekang, Fakfak, Garut, Gianyar, Gombong, Gorontalo, Gresik, Gunung Sitoli, Indramayu, Jakarta Barat, Jakarta Pusat, Jakarta Selatan, Jakarta Timur, Jakarta Utara, Jambi, Jayapura, Jember, Jeneponto, Jepara, Jombang, Kabanjahe, Kalabahi, Kalianda, Kandangan, Karanganyar, Karawang, Kasungan, Kayuagung, Kebumen, Kediri, Kefamenanu, Kendal, Kendari, Kertosono, Ketapang, Kisaran, Klaten, Kolaka, Kota Baru Pulau Laut, Kota Bumi, Kota Jantho, Kotamobagu, Kuala Kapuas, Kuala Kurun, Kuala Pembuang, Kuala Tungkal, Kudus, Kuningan, Kupang, Kutacane, Kutoarjo, Labuhan, Lahat, Lamongan, Langsa, Larantuka, Lawang, Lhoseumawe, Limboto, Lubuk Basung, Lubuk Linggau, Lubuk Pakam, Lubuk Sikaping, Lumajang, Luwuk, Madiun, Magelang, Magetan, Majalengka, Majene, Makale, Makassar, Malang, Mamuju, Manna, Manokwari, Marabahan, Maros, Martapura Kalsel, Sulsel, Masohi, Mataram, Maumere, Medan, Mempawah, Menado, Mentok, Merauke, Metro, Meulaboh, Mojokerto, Muara Bulian, Muara Bungo, Muara Enim, Muara Teweh, Muaro Sijunjung, Muntilan, Nabire, Negara, Nganjuk, Ngawi, Nunukan, Pacitan, Padang, Padang Panjang, Padang Sidempuan, Pagaralam, Painan, Palangkaraya, Palembang, Palopo, Palu, Pamekasan, Pandeglang, Pangka_, Pangkajene Sidenreng, Pangkalan Bun, Pangkalpinang, Panyabungan, Par_, Parepare, Pariaman, Pasuruan, Pati, Payakumbuh, Pekalongan, Pekan Baru, Pemalang, Pematangsiantar, Pendopo, Pinrang, Pleihari, Polewali, Pondok Gede, Ponorogo, Pontianak, Poso, Prabumulih, Praya, Probolinggo, Purbalingga, Purukcahu, Purwakarta, Purwodadigrobogan, Purwokerto, Purworejo, Putussibau, Raha, Rangkasbitung, Rantau, Rantauprapat, Rantepao, Rembang, Rengat, Ruteng, Sabang, Salatiga, Samarinda, Kalbar, Sampang, Sampit, Sanggau, Sawahlunto, Sekayu, Selong, Semarang, Sengkang, Serang, Serui, Sibolga, Sidikalang, Sidoarjo, Sigli, Singaparna, Singaraja, Singkawang, Sinjai, Sintang, Situbondo, Slawi, Sleman, Soasiu, Soe, Solo, Solok, Soreang, Sorong, Sragen, Stabat, Subang, Sukabumi, Sukoharjo, Sumbawa Besar, Sumedang, Sumenep, Sungai Liat, Sungai Penuh, Sungguminasa, Surabaya, Surakarta, Tabanan, Tahuna, Takalar, Takengon, Tamiang Layang, Tanah Grogot, Tangerang, Tanjung Balai, Tanjung Enim, Tanjung Pandan, Tanjung Pinang, Tanjung Redep, Tanjung Selor, Tapak Tuan, Tarakan, Tarutung, Tasikmalaya, Tebing Tinggi, Tegal, Temanggung, Tembilahan, Tenggarong, Ternate, Tolitoli, Tondano, Trenggalek, Tual, Tuban, Tulung Agung, Ujung Berung, Ungaran, Waikabubak, Waingapu, Wamena, Watampone, Watansoppeng, Wates, Wonogiri, Wonosari, Wonosobo, Yogyakarta'
-			url = f'https://api.haipbis.xyz/jadwalsholat?daerah={daer}'
+			url = f'https://v1.haipbis.xyz/jadwalsholat?daerah={daer}'
 			jadwal = get(url).json()
 			return {
 				'Imsyak': jadwal['Imsyak'],
@@ -663,7 +663,7 @@ def jadwalshalat():
 			'msg': '[!] Masukkan parameter daerah'
 		}
 
-@app.route('/api/waifu', methods=['GET','POST'])
+@app.route('/v1/waifu', methods=['GET','POST'])
 def waifu():
 	scrap = bs(get('https://mywaifulist.moe/random').text, 'html.parser')
 	a = json.loads(scrap.find('script', attrs={'type':'application/ld+json'}).string)
@@ -686,7 +686,7 @@ def waifu():
 			'source': result['url']
 		}
 
-@app.route('/api/infogempa', methods=['GET','POST'])
+@app.route('/v1/infogempa', methods=['GET','POST'])
 def infogempa():
 	be = bs(get('https://www.bmkg.go.id/').text, 'html.parser').find('div', class_="col-md-4 md-margin-bottom-10")
 	em = be.findAll('li')
@@ -702,7 +702,7 @@ def infogempa():
 		'potensi': em[5].text
 	}
 
-@app.route('/api/randomquotes', methods=['GET','POST'])
+@app.route('/v1/randomquotes', methods=['GET','POST'])
 def quotes():
 	quotes_file = json.loads(open('quotes.json').read())
 	result = random.choice(quotes_file)
@@ -713,9 +713,9 @@ def quotes():
 		'quotes': result['quotes']
 	}
 
-@app.route('/api/quotesnime/random', methods=['GET','POST'])
+@app.route('/v1/quotesnime/random', methods=['GET','POST'])
 def quotesnimerandom():
-	quotesnime = get('https://animechanapi.xyz/api/quotes/random').json()['data'][0]
+	quotesnime = get('https://animechanapi.xyz/v1/quotes/random').json()['data'][0]
 	print(quotesnime)
 	return {
 		'status': 200,
@@ -725,13 +725,6 @@ def quotesnimerandom():
 			'anime': quotesnime['anime']
 		}
 	}
-@app.route('/api', methods=['GET','POST'])
-def api():
-	return render_template('api.html')
-
-@app.route('/', methods=['GET','POST'])
-def index():
-	return render_template('index.html')
 
 @app.errorhandler(404)
 def error(e):

@@ -278,9 +278,9 @@ def ytv():
 			url = request.args.get('url').replace('[','').replace(']','')
 			uri = re.findall("watch", url)
 			if (uri):
-				uriFinal = uri.split('/')[3].split('=')[2]
+				uriFinal = url.split('/')[3].split('=')[2]
 			else:
-				uriFinal = uri.split('/')[3]
+				uriFinal = url.split('/')[3]
 
 			ytv = post('https://www.y2mate.com/mates/en61/analyze/ajax',data={'url':url,'q_auto':'1','ajax':'1'}).json()
 			yaha = bs(ytv['result'], 'html.parser').findAll('td')
@@ -317,9 +317,9 @@ def yta():
 			url = request.args.get('url').replace('[','').replace(']','')
 			uri = re.findall("watch", url)
 			if (uri):
-				uriFinal = uri.split('/')[3].split('=')[2]
+				uriFinal = url.split('/')[3].split('=')[2]
 			else:
-				uriFinal = uri.split('/')[3]
+				uriFinal = url.split('/')[3]
 
 			yta = post('https://www.y2mate.com/mates/en61/analyze/ajax',data={'url':url,'q_auto':'1','ajax':'1'}).json()
 			yaha = bs(yta['result'], 'html.parser').findAll('td')

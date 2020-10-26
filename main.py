@@ -276,7 +276,7 @@ def ytv():
 	if request.args.get('url'):
 		try:
 			url = request.args.get('url').replace('[','').replace(']','')
-			ytv = post('https://www.y2mate.com/mates/analyze/ajax',data={'url':url,'q_auto':'0','ajax':'1'}).json()
+			ytv = post('https://www.y2mate.com/mates/en61/analyze/ajax',data={'url':url,'q_auto':'1','ajax':'1'}).json()
 			yaha = bs(ytv['result'], 'html.parser').findAll('td')
 			filesize = yaha[len(yaha)-23].text
 			id = re.findall('var k__id = "(.*?)"', ytv['result'])
@@ -309,7 +309,7 @@ def yta():
 	if request.args.get('url'):
 		try:
 			url = request.args.get('url').replace('[','').replace(']','')
-			yta = post('https://www.y2mate.com/mates/analyze/ajax',data={'url':url,'q_auto':'0','ajax':'1'}).json()
+			yta = post('https://www.y2mate.com/mates/en61/analyze/ajax',data={'url':url,'q_auto':'1','ajax':'1'}).json()
 			yaha = bs(yta['result'], 'html.parser').findAll('td')
 			filesize = yaha[len(yaha)-10].text
 			id = re.findall('var k__id = "(.*?)"', yta['result'])

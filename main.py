@@ -182,7 +182,7 @@ def spamming():
             'msg': '[!] Masukkan parameter no'
         }
 
-@app.route('/nulis', methods=['GET','POST'])
+@app.route('/v1/nulis', methods=['GET','POST'])
 def noolees():
     if request.args.get('text'):
         try:

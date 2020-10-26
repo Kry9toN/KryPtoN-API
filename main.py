@@ -276,13 +276,19 @@ def ytv():
 	if request.args.get('url'):
 		try:
 			url = request.args.get('url').replace('[','').replace(']','')
+                        uri = re.findall("watch", url)
+                        if (uri):
+                           uriFinal = uri.split('/')[3].split('=')[2]
+                        else:
+                           uriFinal = uri.split('/')[3]
+
 			ytv = post('https://www.y2mate.com/mates/en61/analyze/ajax',data={'url':url,'q_auto':'1','ajax':'1'}).json()
 			yaha = bs(ytv['result'], 'html.parser').findAll('td')
 			filesize = yaha[len(yaha)-23].text
 			id = re.findall('var k__id = "(.*?)"', ytv['result'])
 			thumb = bs(ytv['result'], 'html.parser').find('img')['src']
 			title = bs(ytv['result'], 'html.parser').find('b').text
-			dl_link = bs(post('https://www.y2mate.com/mates/convert',data={'type':'youtube','_id':id[0],'v_id':url.split('/')[1],'ajax':'1','token':'','ftype':'mp4','fquality':'360p'}).json()['result'],'html.parser').find('a')['href']
+			dl_link = bs(post('https://www.y2mate.com/mates/convert',data={'type':'youtube','_id':id[0],'v_id':uriFinal,'ajax':'1','token':'','ftype':'mp4','fquality':'360p'}).json()['result'],'html.parser').find('a')['href']
 			return {
 				'status': 200,
 				'title': title,
@@ -309,13 +315,19 @@ def yta():
 	if request.args.get('url'):
 		try:
 			url = request.args.get('url').replace('[','').replace(']','')
+                        uri = re.findall("watch", url)
+                        if (uri):
+                           uriFinal = uri.split('/')[3].split('=')[2]
+                        else:
+                           uriFinal = uri.split('/')[3]
+
 			yta = post('https://www.y2mate.com/mates/en61/analyze/ajax',data={'url':url,'q_auto':'1','ajax':'1'}).json()
 			yaha = bs(yta['result'], 'html.parser').findAll('td')
 			filesize = yaha[len(yaha)-10].text
 			id = re.findall('var k__id = "(.*?)"', yta['result'])
 			thumb = bs(yta['result'], 'html.parser').find('img')['src']
 			title = bs(yta['result'], 'html.parser').find('b').text
-			dl_link = bs(post('https://www.y2mate.com/mates/convert',data={'type':'youtube','_id':id[0],'v_id':url.split('/')[1],'ajax':'1','token':'','ftype':'mp3','fquality':'128'}).json()['result'],'html.parser').find('a')['href']
+			dl_link = bs(post('https://www.y2mate.com/mates/convert',data={'type':'youtube','_id':id[0],'v_id':uriFinal,'ajax':'1','token':'','ftype':'mp3','fquality':'128'}).json()['result'],'html.parser').find('a')['href']
 			return {
 				'status': 200,
 				'title': title,

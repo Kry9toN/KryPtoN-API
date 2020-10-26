@@ -16,7 +16,7 @@ import os, math, json, random, re, html_text, pytesseract, base64, time, smtplib
 ua_ig = 'Mozilla/5.0 (Linux; Android 10; Redmi Note 9 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Mobile Safari/537.36'
 
 app = Flask(__name__)
-apiKey = 'O8mUD3YrHIy9KM1fMRjamw8eg'
+apiKey = 'wWIZ9Njn3vycAlQvtbH4aqfTh'
 apiKey_ocr = '09731daace88957'
 app.config['MEDIA'] = 'tts'
 app.secret_key = b'BB,^z\x90\x88?\xcf\xbb'
@@ -241,7 +241,7 @@ def tts():
 					'msg': '[❗] Maaf teks terlalu panjang!!',
 				}
 			else:
-				url = f'https://rest.farzain.com/v1/tts.php?id={teks}&apikey='
+				url = f'https://rest.farzain.com/api/tts.php?id={teks}&apikey='
 				if os.path.isfile('./tts/tts.mp3') == True:
 					os.remove('./tts/tts.mp3')
 					Tts = get(f'{url}{apiKey}').content
@@ -558,7 +558,7 @@ def cuaca():
 		try:
 			q = request.args.get('q')
 			print(q)
-			url = f'https://rest.farzain.com/v1/cuaca.php?id={q}&apikey='
+			url = f'https://rest.farzain.com/api/cuaca.php?id={q}&apikey='
 			weather = get(f'{url}{apiKey}').json()
 			print(weather)
 			if weather['respon']['deskripsi'] == 'null' or weather['respon']['deskripsi'] == None:

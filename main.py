@@ -208,7 +208,7 @@ def wikipedia():
 	if request.args.get('q'):
 		try:
 			kya = request.args.get('q')
-			cih = f'https://id.wikipedia.org/w/v1.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={kya}'
+			cih = f'https://id.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles={kya}'
 			heuh = get(cih).json()
 			heuh_ = heuh['query']['pages']
 			hueh = re.findall(r'(\d+)', str(heuh_))

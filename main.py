@@ -249,7 +249,7 @@ def tts():
 					return {
 						'status': 200,
 						'msg': 'Success convert text to speech!',
-						'file': 'https://mhankbarbar/tts/tts.mp3'
+						'file': 'https://api.kry9ton.tech/tts/tts.mp3'
 					}
 				else:
 					Tts = get(f'{url}{apiKey}').content
@@ -257,7 +257,7 @@ def tts():
 					return {
 						'status': 200,
 						'msg': 'Success convert text to speech!',
-						'file': 'https://mhankbarbar.herokuapp.com/tts/tts.mp3'
+						'file': 'https://api.kry9ton.tech/tts/tts.mp3'
 					}
 		except Exception as e:
 			print(e)
@@ -589,8 +589,7 @@ def cuaca():
 						'kelembapan': weather['respon']['kelembapan'],
 						'udara': weather['respon']['udara'],
 						'angin': weather['respon']['angin']
-					},
-					'creator': 'Mhank BarBar'
+				        }
 				}
 		except Exception as e:
 			print('Error : %s' % e)

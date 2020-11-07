@@ -506,14 +506,14 @@ def brainly_scraper():
 @app.route('/v1/nekonime', methods=['GET','POST'])
 def nekonimek():
 	try:
-		neko = get('https://waifu.pics/v1/sfw/neko').json()
+		neko = get('https://waifu.pics/api/sfw/neko').json()
 		nimek = neko['url']
 		return {
 			'status': 200,
 			'result': nimek
 		}
 	except:
-		neko = get('https://waifu.pics/v1/sfw/neko').json()
+		neko = get('https://waifu.pics/api/sfw/neko').json()
 		nimek = neko['url']
 		return {
 			'status': 200,
@@ -524,7 +524,7 @@ def nekonimek():
 def randomloli():
 	try:
 		hehe = ['kawaii','neko']
-		loli = get('https://v1.lolis.life/%s' % random.choice(hehe)).json()['url']
+		loli = get('https://api.lolis.life/%s' % random.choice(hehe)).json()['url']
 		return {
 			'status': 200,
 			'result': loli
@@ -540,7 +540,7 @@ def igeh():
 		try:
 			url = request.args.get('url')
 			data = {'id': url}
-			result = get('https://www.villahollanda.com/v1.php?url=' + url).json()
+			result = get('https://www.villahollanda.com/api.php?url=' + url).json()
 			if result['descriptionc'] == None:
 				return {
 					'status': False,
@@ -652,7 +652,7 @@ def jadwalshalat():
 		try:
 			daer = request.args.get('daerah')
 			daerah = 'Ambarawa, Ambon, Amlapura, Amuntai, Argamakmur, Atambua, Babo, Bagan Siapiapi, Kalteng, Bajawa, Balige, Balikpapan, Banda Aceh, Bandarlampung, Bandung, Bangkalan, Bangkinang, Bangko, Bangli, Banjar, Banjar Baru, Banjarmasin, Banjarnegara, Bantaeng, Banten, Bantul, Banyuwangi, Barabai, Barito, Barru, Batam, Batang, Batu, Baturaja, Batusangkar, Baubau, Bekasi, Bengkalis, Bengkulu, Benteng, Biak, Bima, Binjai, Bireuen, Bitung, Blitar, Blora, Bogor, Bojonegoro, Bondowoso, Bontang, Boyolali, Brebes, Bukit Tinggi, Maluku, Bulukumba, Buntok, Cepu, Ciamis, Cianjur, Cibinong, Cilacap, Cilegon, Cimahi, Cirebon, Curup, Demak, Denpasar, Depok, Dili, Dompu, Donggala, Dumai, Ende, Enggano, Enrekang, Fakfak, Garut, Gianyar, Gombong, Gorontalo, Gresik, Gunung Sitoli, Indramayu, Jakarta Barat, Jakarta Pusat, Jakarta Selatan, Jakarta Timur, Jakarta Utara, Jambi, Jayapura, Jember, Jeneponto, Jepara, Jombang, Kabanjahe, Kalabahi, Kalianda, Kandangan, Karanganyar, Karawang, Kasungan, Kayuagung, Kebumen, Kediri, Kefamenanu, Kendal, Kendari, Kertosono, Ketapang, Kisaran, Klaten, Kolaka, Kota Baru Pulau Laut, Kota Bumi, Kota Jantho, Kotamobagu, Kuala Kapuas, Kuala Kurun, Kuala Pembuang, Kuala Tungkal, Kudus, Kuningan, Kupang, Kutacane, Kutoarjo, Labuhan, Lahat, Lamongan, Langsa, Larantuka, Lawang, Lhoseumawe, Limboto, Lubuk Basung, Lubuk Linggau, Lubuk Pakam, Lubuk Sikaping, Lumajang, Luwuk, Madiun, Magelang, Magetan, Majalengka, Majene, Makale, Makassar, Malang, Mamuju, Manna, Manokwari, Marabahan, Maros, Martapura Kalsel, Sulsel, Masohi, Mataram, Maumere, Medan, Mempawah, Menado, Mentok, Merauke, Metro, Meulaboh, Mojokerto, Muara Bulian, Muara Bungo, Muara Enim, Muara Teweh, Muaro Sijunjung, Muntilan, Nabire, Negara, Nganjuk, Ngawi, Nunukan, Pacitan, Padang, Padang Panjang, Padang Sidempuan, Pagaralam, Painan, Palangkaraya, Palembang, Palopo, Palu, Pamekasan, Pandeglang, Pangka_, Pangkajene Sidenreng, Pangkalan Bun, Pangkalpinang, Panyabungan, Par_, Parepare, Pariaman, Pasuruan, Pati, Payakumbuh, Pekalongan, Pekan Baru, Pemalang, Pematangsiantar, Pendopo, Pinrang, Pleihari, Polewali, Pondok Gede, Ponorogo, Pontianak, Poso, Prabumulih, Praya, Probolinggo, Purbalingga, Purukcahu, Purwakarta, Purwodadigrobogan, Purwokerto, Purworejo, Putussibau, Raha, Rangkasbitung, Rantau, Rantauprapat, Rantepao, Rembang, Rengat, Ruteng, Sabang, Salatiga, Samarinda, Kalbar, Sampang, Sampit, Sanggau, Sawahlunto, Sekayu, Selong, Semarang, Sengkang, Serang, Serui, Sibolga, Sidikalang, Sidoarjo, Sigli, Singaparna, Singaraja, Singkawang, Sinjai, Sintang, Situbondo, Slawi, Sleman, Soasiu, Soe, Solo, Solok, Soreang, Sorong, Sragen, Stabat, Subang, Sukabumi, Sukoharjo, Sumbawa Besar, Sumedang, Sumenep, Sungai Liat, Sungai Penuh, Sungguminasa, Surabaya, Surakarta, Tabanan, Tahuna, Takalar, Takengon, Tamiang Layang, Tanah Grogot, Tangerang, Tanjung Balai, Tanjung Enim, Tanjung Pandan, Tanjung Pinang, Tanjung Redep, Tanjung Selor, Tapak Tuan, Tarakan, Tarutung, Tasikmalaya, Tebing Tinggi, Tegal, Temanggung, Tembilahan, Tenggarong, Ternate, Tolitoli, Tondano, Trenggalek, Tual, Tuban, Tulung Agung, Ujung Berung, Ungaran, Waikabubak, Waingapu, Wamena, Watampone, Watansoppeng, Wates, Wonogiri, Wonosari, Wonosobo, Yogyakarta'
-			url = f'https://v1.haipbis.xyz/jadwalsholat?daerah={daer}'
+			url = f'https://api.haipbis.xyz/jadwalsholat?daerah={daer}'
 			jadwal = get(url).json()
 			return {
 				'Imsyak': jadwal['Imsyak'],
@@ -726,7 +726,7 @@ def quotes():
 
 @app.route('/v1/quotesnime/random', methods=['GET','POST'])
 def quotesnimerandom():
-	quotesnime = get('https://animechanapi.xyz/v1/quotes/random').json()['data'][0]
+	quotesnime = get('https://animechanapi.xyz/api/quotes/random').json()['data'][0]
 	print(quotesnime)
 	return {
 		'status': 200,

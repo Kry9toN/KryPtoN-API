@@ -8,7 +8,7 @@ def tulis(text):
     '''
     text : string
     '''
-    img, font, kata, tempkata=Image.open("lib/nulis/before.jpg"), ImageFont.truetype("lib/nulis/IndieFlower.ttf",24),'',''
+    img, font, kata, tempkata=Image.open("lib/nulis/before2.jpg"), ImageFont.truetype("lib/nulis/IndieFlower.ttf",24),'',''
     draw=ImageDraw.Draw(img)
     if type(text) is not list:
         global output

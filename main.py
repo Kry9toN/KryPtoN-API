@@ -204,7 +204,7 @@ def noolees():
             'msg': '[!] Masukkan parameter text'
         }
 @app.route('/v1/nulis2', methods=['GET','POST'])
-def noolees():
+def noolees2():
     if request.args.get('text'):
         try:
             nulis2 = tulis(unquote(request.args.get('text')))

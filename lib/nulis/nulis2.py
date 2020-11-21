@@ -4,7 +4,7 @@
 from PIL import Image, ImageDraw, ImageFont
 from base64 import b64encode as bs64
 output=[]
-def tulis(text):
+def tulis2(text):
     '''
     text : string
     '''
@@ -32,11 +32,3 @@ def tulis(text):
     if len(spliter) > 25:
         tulis(spliter[25:])
     return output
-
-def imageToBase64(fname):
-    '''
-    fname : path of filename
-    e.g imageToBase64('result.jpg')
-    '''
-    with open(fname, 'rb') as file:
-        return 'data:image/jpeg;base64,'+ bs64(file.read()).decode()

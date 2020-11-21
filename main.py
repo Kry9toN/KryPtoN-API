@@ -203,6 +203,27 @@ def noolees():
             'status': False,
             'msg': '[!] Masukkan parameter text'
         }
+@app.route('/v1/nulis2', methods=['GET','POST'])
+def noolees():
+    if request.args.get('text'):
+        try:
+            nulis2 = tulis(unquote(request.args.get('text')))
+            for i in nulis2:
+                i.save('resolt.jpg')
+            return {
+                'status': 200,
+                'result': imageToBase64('resolt.jpg')
+            }
+        except:
+            return {
+                'status': False,
+                'error': 'Failed writing dude:('
+            }
+    else:
+        return {
+            'status': False,
+            'msg': '[!] Masukkan parameter text'
+        }
 @app.route('/v1/wiki', methods=['GET','POST'])
 def wikipedia():
 	if request.args.get('q'):

@@ -207,7 +207,7 @@ def noolees():
 def noolees2():
     if request.args.get('text'):
         try:
-            nulis2 = tulis(unquote(request.args.get('text')))
+            nulis2 = tulis2(unquote(request.args.get('text')))
             for i in nulis2:
                 i.save('resolt.jpg')
             return {
